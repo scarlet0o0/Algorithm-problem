@@ -1,33 +1,35 @@
-INF = -1
 n,m,v = map(int,input().split())
 arr = [[] for _ in range(n+1)]
 dfs_arr = [0]*(n+1)
 for _ in range(m):
     i,j = map(int,input().split())
     arr[i].append(j)
+    arr[j].append(i)
 for i in range(n+1):
-    arr[i].append(INF)
+     arr[i].sort()
 
-print(n,m,v)
-print(arr)
-
-def dfs(x):
-    for i in arr[x]:
-        if dfs_arr[i] == 0 and i != INF:
-            dfs_arr[i] = 1
-            print(i)
-            dfs(i)
-        else:
-            break 
-print(v)
-dfs(v)
+def dfs(start,v_arr,arr):
+    if v_arr[start] != 1:
+        print(start,end=" ")
+        v_arr[start] = 1
+        for i in arr[start]:
+            dfs(i,v_arr,arr)
 
 bfs_q = []
 bfs_arr = [0]*(n+1)
-def bfs(x):
-    for i in arr[x]:
-        if bfs_arr[i] == i != INF:
-            bfs_q.append(i)
+def bfs(start,v_arr,arr):
+    bfs_q.append(start)
+    while bfs_q:
+        num=bfs_q.pop(0)
+        if v_arr[num] != 1:
+            print(num,end=" ")
+            v_arr[num] = 1
+            for i in arr[num]:
+                bfs_q.append(i)
+
+dfs(v,dfs_arr,arr)
+print()
+bfs(v,bfs_arr,arr)
         
         
         
