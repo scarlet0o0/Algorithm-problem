@@ -6,8 +6,6 @@ for _ in range(v):
     arr[i].append(j)
     arr[j].append(i)
 
-print(n,v,arr)
-
 q = []
 v_arr = [0]*(n+1)
 
@@ -17,7 +15,6 @@ def bfs(v_arr,arr):
     while q:
         num = q.pop(0)
         if v_arr[num] != 1:
-            print(num)
             count += 1
             v_arr[num] = 1
             for i in arr[num]:
